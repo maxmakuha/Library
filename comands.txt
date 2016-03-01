@@ -1,0 +1,36 @@
+create table app.books (
+bookId int not null primary key,
+author varchar(100),
+title varchar(100),
+description varchar(100)
+);
+
+INSERT INTO APP.BOOKS(BOOKID, AUTHOR, TITLE, DESCRIPTION) values (1, 'Тарас Шевченко', 'Кобзар', 'Збірка поетичних творів');
+INSERT INTO APP.BOOKS(BOOKID, AUTHOR, TITLE, DESCRIPTION) values (2, 'Леся Українка', 'Лісова пісня', 'Драма-феєрія в 3-ьох діях');
+INSERT INTO APP.BOOKS(BOOKID, AUTHOR, TITLE, DESCRIPTION) values (3, 'Іван Франко', 'Борислав сміється', 'Твір про робітничий рух');
+
+create table app.users (
+userId int not null primary key,
+role varchar(30),
+name varchar(30),
+password varchar(30)
+);
+
+INSERT INTO app.users(userId, role, name, password) values (1, 'Librarian', 'Pavlo', '0000');
+INSERT INTO app.users(userId, role, name, password) values (2, 'Librarian', 'Petro', '0000');
+INSERT INTO app.users(userId, role, name, password) values (3, 'User', 'Ivan', '0000');
+INSERT INTO app.users(userId, role, name, password) values (4, 'User', 'Iryna', '0000');
+
+create table app.orders (
+orderId int not null primary key,
+bookId int not null,
+userId int not null,
+foreign key (bookId)
+       references app.books(bookId)
+	   ON UPDATE NO ACTION
+       ON DELETE NO ACTION,
+foreign key (userId)
+       references app.users(userId)
+	   ON UPDATE NO ACTION
+       ON DELETE NO ACTION
+);
